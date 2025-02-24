@@ -1,101 +1,320 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+export default function Home() {
+    const [activeTab, setActiveTab] = useState("QS 1");
+    const [chartType1, setChartType1] = useState("yearly");
+    const [chartType2, setChartType2] = useState("yearly");
+    const [chartType3, setChartType3] = useState("canada");
+    const [table1, setTable1] = useState("canada");
+
+    const [selectedYear, setSelectedYear] = useState("2024");
+    const [selectedRegions, setSelectedRegions] = useState("Toronto");
+
+    const years = ["2019", "2020", "2021", "2022", "2023", "2024"];
+    const regions = ["Toronto", "Quebec", "British Columbia", "Alberta", "Waterloo Region", "Ottawa", "East Coast", "Other"];
+
+    return (
+        <>
+            <nav className="bg-gray-800 p-4 flex justify-between items-center">
+                <Image src="/logo.png" alt="Logo" width={50} height={50} />
+
+                <div className="flex space-x-4">
+                    {["QS 1", "QS 2", "QS 3", "QS 4"].map((tab) => (
+                        <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-6 py-3 text-white font-semibold rounded-lg transition duration-300 ease-in-out ${
+                                activeTab === tab ? "bg-blue-600 transform scale-105" : "bg-gray-700 hover:bg-gray-600"
+                            }`}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+            </nav>
+
+
+            <div className="p-4">
+                {activeTab === "QS 1" && (
+                    <div className="text-center">
+                        <div className="mb-4 flex justify-start space-x-4 w-full ml-[17%]">
+                            <button
+                                onClick={() => setChartType1("yearly")}
+                                className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${
+                                    chartType1 === "yearly" ? "bg-blue-500" : "bg-gray-600"
+                                }`}
+                            >
+                                Yearly
+                            </button>
+                            <button
+                                onClick={() => setChartType1("quarterly")}
+                                className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${
+                                    chartType1 === "quarterly" ? "bg-blue-500" : "bg-gray-600"
+                                }`}
+                            >
+                                Quarterly
+                            </button>
+                        </div>
+
+                        <div className="flex justify-center space-x-4">
+                            <iframe
+                                src={chartType1 === "yearly"
+                                    ? "/plots/tab1/tab1_investment_yearly.html"
+                                    : "/plots/tab1/tab1_investment_quarterly.html"}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+
+                            <iframe
+                                src={"/plots/tab1/tab1_funding_volume.html"}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+                        </div>
+
+                        <div className="flex justify-start mt-4 ml-[23%] w-full">
+                            <select
+                                value={selectedYear}
+                                onChange={(e) => setSelectedYear(e.target.value)}
+                                className="px-6 py-3 text-white bg-gray-600 border border-gray-300 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            >
+                                {years.map((year) => (
+                                    <option key={year} value={year} className="bg-gray-600 text-white">
+                                        {year}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="flex justify-center space-x-4 mt-4">
+                            <iframe
+                                src={`/plots/tab1/daily_years/${selectedYear}.html`}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+
+                            <iframe
+                                src={"/plots/tab1/tab1_funding_size.html"}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === "QS 2" &&
+                <div className="text-center">
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <iframe
+                            src={`/plots/tab2/tab2_avgdealsizestage.html`}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+
+                        <iframe
+                            src={"/plots/tab2/tab2_stageproportion.html"}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+                    </div>
+
+
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <div className="flex justify-center space-x-4 mt-4">
+                            <button
+                                onClick={() => setChartType2("yearly")}
+                                className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                    chartType2 === "yearly" ? "bg-blue-500" : "bg-gray-600"
+                                }`}
+                            >
+                                Yearly
+                            </button>
+                            <button
+                                onClick={() => setChartType2("quarterly")}
+                                className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                    chartType2 === "quarterly" ? "bg-blue-500" : "bg-gray-600"
+                                }`}
+                            >
+                                Quarterly
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <iframe
+                            src={chartType2 === "yearly"
+                                ? "/plots/tab2/tab2_dealsquantitystageyearly.html"
+                                : "/plots/tab2/tab2_dealsquantitystagequarterly.html"}
+                            width="100%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+                    </div>
+                </div>}
+                {activeTab === "QS 3" &&
+                <div className="text-center">
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <iframe
+                            src={"/plots/tab3/tab3_dealquantity.html"}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+
+                        <iframe
+                            src={"/plots/tab3/tab3_dealvolumepertype.html"}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <button
+                            onClick={() => setChartType3("canada")}
+                            className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                chartType3 === "canada" ? "bg-blue-500" : "bg-gray-600"
+                            }`}
+                        >
+                            Canada
+                        </button>
+                        <button
+                            onClick={() => setChartType3("united states")}
+                            className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                chartType3 === "united states" ? "bg-blue-500" : "bg-gray-600"
+                            }`}
+                        >
+                            United States
+                        </button>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <iframe
+                            src={"/plots/tab3/tab3_dealvalue.html"}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+
+                        <iframe
+                            src={chartType3 === "canada"
+                                ? "/plots/tab3/canada.html"
+                                : "/plots/tab3/usa.html"}
+                            width="50%"
+                            height="500px"
+                            className="border rounded-lg"
+                        ></iframe>
+                    </div>
+
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <button
+                            onClick={() => setTable1("canada")}
+                            className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                table1 === "canada" ? "bg-blue-500" : "bg-gray-600"
+                            }`}
+                        >
+                            Canada
+                        </button>
+                        <button
+                            onClick={() => setTable1("united states")}
+                            className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                table1 === "united states" ? "bg-blue-500" : "bg-gray-600"
+                            }`}
+                        >
+                            United States
+                        </button>
+                        <button
+                            onClick={() => setTable1("international")}
+                            className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                                table1 === "international" ? "bg-blue-500" : "bg-gray-600"
+                            }`}
+                        >
+                            International
+                        </button>
+                    </div>
+
+                    <br></br>
+
+                    <iframe
+                        src={table1 === "canada" ? "/plots/tab3/top_canada_investors.html" : table1 === "united states" ? "/plots/tab3/top_us_investors.html" : "/plots/tab3/top_international_investors.html"}
+                        width="100%"
+                        height="500"
+                        frameBorder="0"
+                    ></iframe>
+
+                </div>}
+
+                {activeTab === "QS 4" &&
+                    <div className="text-center">
+                        <div className="flex justify-center space-x-4 mt-4">
+                            <iframe
+                                src={"/plots/tab4/tab4_total_average_sector.html"}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+
+                            <iframe
+                                src="/plots/tab4/tab4_wordgroup.html" // NEED TO ADD
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+                        </div>
+
+                        <br></br>
+
+                        <div className="relative inline-block w-0.001 ml-[45%]">
+                            <select
+                                value={selectedRegions}
+                                onChange={(e) => setSelectedRegions(e.target.value)}
+                                className="block w-full px-6 py-3 bg-gray-800 text-white border border-gray-600 rounded-lg shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+                            >
+                                <option value="" disabled>Select a region</option>
+                                {regions.map((region) => (
+                                    <option key={region} value={region}>
+                                        {region}
+                                    </option>
+                                ))}
+                            </select>
+                            <div className="absolute top-0 right-0 flex items-center px-3 py-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-center space-x-4 mt-4">
+                            <iframe
+                                src={"/plots/tab4/tab4_sector_line.html"}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+
+                            <iframe
+                                src={`/plots/tab4/reigons/${selectedRegions}.html`}
+                                width="50%"
+                                height="500px"
+                                className="border rounded-lg"
+                            ></iframe>
+                        </div>
+                    </div>}
+
+                {/*{activeTab === "QS 5" &&*/}
+                {/*    <div className="text-center">*/}
+
+                {/*    </div>}*/}
+            </div>
+        </>
+    );
 }
