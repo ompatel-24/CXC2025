@@ -77,18 +77,26 @@ export default function Home() {
                             ></iframe>
                         </div>
 
-                        <div className="flex justify-start mt-4 ml-[23%] w-full">
+                        <br></br>
+
+                        <div className="relative inline-block w-0.001 ml-[52%]">
                             <select
                                 value={selectedYear}
                                 onChange={(e) => setSelectedYear(e.target.value)}
-                                className="px-6 py-3 text-white bg-gray-600 border border-gray-300 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="block w-full px-6 py-3 bg-gray-800 text-white border border-gray-600 rounded-lg shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
                             >
+                                <option value="" disabled>Select a year</option>
                                 {years.map((year) => (
-                                    <option key={year} value={year} className="bg-gray-600 text-white">
+                                    <option key={year} value={year}>
                                         {year}
                                     </option>
                                 ))}
                             </select>
+                            <div className="absolute top-0 right-0 flex items-center px-3 py-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
 
                         <div className="flex justify-center space-x-4 mt-4">
