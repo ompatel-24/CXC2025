@@ -4,7 +4,7 @@ import Image from "next/image";
 
 
 export default function Home() {
-    const [activeTab, setActiveTab] = useState("QS 1");
+    const [activeTab, setActiveTab] = useState("Investment Trends");
     const [chartType1, setChartType1] = useState("yearly");
     const [chartType2, setChartType2] = useState("yearly");
     const [chartType3, setChartType3] = useState("canada");
@@ -22,7 +22,7 @@ export default function Home() {
                 <Image src="/logo.png" alt="Logo" width={50} height={50} />
 
                 <div className="flex space-x-4">
-                    {["QS 1", "QS 2", "QS 3", "QS 4"].map((tab) => (
+                    {["Investment Trends", "Investment Stages", "Investor Demographics", "Sectoral & Regional Insights"].map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -38,7 +38,7 @@ export default function Home() {
 
 
             <div className="p-4">
-                {activeTab === "QS 1" && (
+                {activeTab === "Investment Trends" && (
                     <div className="text-center">
                         <div className="mb-4 flex justify-start space-x-4 w-full ml-[17%]">
                             <button
@@ -117,7 +117,7 @@ export default function Home() {
                     </div>
                 )}
 
-                {activeTab === "QS 2" &&
+                {activeTab === "Investment Stages" &&
                 <div className="text-center">
                     <div className="flex justify-center space-x-4 mt-4">
                         <iframe
@@ -168,7 +168,7 @@ export default function Home() {
                         ></iframe>
                     </div>
                 </div>}
-                {activeTab === "QS 3" &&
+                {activeTab === "Investor Demographics" &&
                 <div className="text-center">
                     <div className="flex justify-center space-x-4 mt-4">
                         <iframe
@@ -261,7 +261,7 @@ export default function Home() {
 
                 </div>}
 
-                {activeTab === "QS 4" &&
+                {activeTab === "Sectoral & Regional Insights" &&
                     <div className="text-center">
                         <div className="flex justify-center space-x-4 mt-4">
                             <iframe
@@ -272,9 +272,10 @@ export default function Home() {
                             ></iframe>
 
                             <iframe
-                                src="/plots/tab4/tab4_wordgroup.html" // NEED TO ADD
+                                src="/plots/tab4/img.jpeg"
                                 width="50%"
                                 height="500px"
+                                style={{ objectFit: "cover", overflow: "hidden", border: "hidden" }}
                                 className="border rounded-lg"
                             ></iframe>
                         </div>
