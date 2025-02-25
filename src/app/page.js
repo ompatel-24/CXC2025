@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-
 export default function Home() {
     const [activeTab, setActiveTab] = useState("Investment Trends");
     const [chartType1, setChartType1] = useState("yearly");
@@ -19,7 +18,10 @@ export default function Home() {
     return (
         <>
             <nav className="bg-gray-800 p-4 flex justify-between items-center">
-                <Image src="/logo.png" alt="Logo" width={50} height={50} />
+                <div className="flex items-center gap-2">
+                    <Image src="/logo.png" alt="Logo" width={50} height={50} className="inline-block" />
+                    <Image src="/runQL-logo.png" alt="Logo" width={100} height={100} className="inline-block" />
+                </div>
 
                 <div className="flex space-x-4">
                     {["Investment Trends", "Investment Stages", "Investor Demographics", "Sectoral & Regional Insights"].map((tab) => (
@@ -40,7 +42,7 @@ export default function Home() {
             <div className="p-4">
                 {activeTab === "Investment Trends" && (
                     <div className="text-center">
-                        <div className="mb-4 flex justify-start space-x-4 w-full ml-[17%]">
+                        <div className="mb-4 flex justify-start space-x-4 w-full ml-auto">
                             <button
                                 onClick={() => setChartType1("yearly")}
                                 className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 ${
@@ -79,7 +81,7 @@ export default function Home() {
 
                         <br></br>
 
-                        <div className="relative inline-block w-0.001 ml-[52%]">
+                        <div className="relative inline-block w-0.001 ml-[-90%]">
                             <select
                                 value={selectedYear}
                                 onChange={(e) => setSelectedYear(e.target.value)}
@@ -137,7 +139,7 @@ export default function Home() {
 
 
                     <div className="flex justify-center space-x-4 mt-4">
-                        <div className="flex justify-center space-x-4 mt-4">
+                        <div className="flex justify-center space-x-4 ml-[-84%]">
                             <button
                                 onClick={() => setChartType2("yearly")}
                                 className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
@@ -186,7 +188,9 @@ export default function Home() {
                         ></iframe>
                     </div>
 
-                    <div className="flex justify-center space-x-4 mt-4">
+                    <br></br>
+
+                    <div className="flex justify-center space-x-4 ml-[81%]">
                         <button
                             onClick={() => setChartType3("canada")}
                             className={`px-6 py-3 text-white rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
@@ -272,17 +276,17 @@ export default function Home() {
                             ></iframe>
 
                             <iframe
-                                src="/plots/tab4/img.jpeg"
+                                src="/plots/tab4/wordcloud.png"
                                 width="50%"
                                 height="500px"
-                                style={{ objectFit: "cover", overflow: "hidden", border: "hidden" }}
+                                style={{ objectFit: "contain", overflow: "hidden", border: "hidden" }}
                                 className="border rounded-lg"
                             ></iframe>
                         </div>
 
                         <br></br>
 
-                        <div className="relative inline-block w-0.001 ml-[45%]">
+                        <div className="relative inline-block w-0.001 ml-[90%]">
                             <select
                                 value={selectedRegions}
                                 onChange={(e) => setSelectedRegions(e.target.value)}
