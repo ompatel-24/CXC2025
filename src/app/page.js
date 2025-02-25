@@ -269,7 +269,7 @@ export default function Home() {
                     <div className="text-center">
                         <div className="flex justify-center space-x-4 mt-4">
                             <iframe
-                                src={"/plots/tab4/tab4_total_average_sector.html"}
+                                src={"/plots/tab4/tab4_average_bar.html"}
                                 width="50%"
                                 height="500px"
                                 className="border rounded-lg"
